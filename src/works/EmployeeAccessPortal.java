@@ -10,11 +10,5 @@ public class EmployeeAccessPortal
 
         System.out.print("Click any key to open the ticket-selling software> ");
         String input = scanner.nextLine();
-
-        if (input == "f")
-        {
-            Main mainer = new Main();
-            mainer.main(args);
-        }
     }
 }

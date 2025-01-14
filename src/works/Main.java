@@ -78,14 +78,21 @@ public class Main
         SimpleDateFormat simpledFormat = new SimpleDateFormat("dd/MM/yyyy");
         Quesionnare();
 
-        String optionToContinue = "y";
-        filler = 0;
+        String optionToContinue = "";
+        filler = 1;
         CalculatingAlgorithms calculate = new CalculatingAlgorithms();
+        TicketPrinter myTicket = new TicketPrinter();
 
-        while (optionToContinue.equals("y"))
+        for (int i = 0; i < partyCount; i++)
         {
-            System.out.printf("Whose ticket do you want to view? Person 1-%d> ", nameArray.size());
+            myTicket.theBiggestFrameTheWorldsEverSeen.repaint(); //clear board
+            calculate.costsIncurred = 0;
+            calculate.ridingTheTrain = ""; calculate.yourID = "";
+            calculate.textFiller = ""; //reset variables
+
+            System.out.printf("View a ticket person 1-%d> ", nameArray.size());
             continueOption = scanner.nextInt();
+            scanner.nextLine(); //refresh
             Date date1 = simpledFormat.parse(attendDate);
             Date date2 = simpledFormat.parse(bDayArray.get(continueOption-1));
             BigInteger indeed = new BigInteger(String.valueOf
@@ -98,11 +105,9 @@ public class Main
 
             calculate.main(args);
 
-            if (partyCount > 1)
-            {
-                System.out.print("Do you want to continue y/n?> ");
-                optionToContinue = scanner.nextLine();
-            }
+            System.out.println("Close the window and click enter to continue> ");
+            String filler1 = scanner.nextLine();
+
         }
     }
 }

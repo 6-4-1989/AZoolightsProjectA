@@ -53,8 +53,8 @@ public class TicketPrinter extends JFrame
         panelz.add(canAccessTrain);
 
         //Alcohol
-        String textFiller = (Main.timeDifference >= 21) ? "Can Alcohol" : "No Alcohol";
-        string.append(textFiller);
+        CalculatingAlgorithms calculation = new CalculatingAlgorithms();
+        string.append(calculation.textFiller);
         canAccessAlcohol = new JLabel("     " + string.toString(), SwingConstants.LEFT);
         canAccessAlcohol.setFont(new Font("Serif", Font.ITALIC, 18));
         panelz.add(canAccessAlcohol);
@@ -62,7 +62,7 @@ public class TicketPrinter extends JFrame
         setContentPane(panelz);
         theBiggestFrameTheWorldsEverSeen.setMinimumSize(new Dimension(8000, 6000));
         getContentPane().setBackground(Color.PINK);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         setVisible(true);
     }
