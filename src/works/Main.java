@@ -6,13 +6,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class Main
 {
-    static String names, bDay, height, weight,
-            attendDay, attendDate, option, driveOrWalk;
+    static String names="", bDay="", height="", weight="",
+            attendDay="", attendDate="", option="", driveOrWalk="";
     static int filler, continueOption, partyCount;
-    static String [] nameArray, weightArray, heightArray, bDayArray;
+    static ArrayList<String> nameArray = new ArrayList<String>();
+    static ArrayList<String> weightArray = new ArrayList<String>();
+    static ArrayList<String> heightArray = new ArrayList<String>();
+    static ArrayList<String> bDayArray = new ArrayList<String>();
     static long timeDifference;
 
     public static void Quesionnare() throws ParseException
@@ -36,40 +40,31 @@ public class Main
         for (int i = 0; i < partyCount; i++)
         {
             System.out.printf("What is the name of person %d?> ", i);
-            names += scanner.nextLine(); names += " ";
+            names = scanner.nextLine(); nameArray.add(names);
         }
-        nameArray = names.split(" ");
 
         if (driveOrWalk.equals("walk") || driveOrWalk.equals("Walk"))
         {
             System.out.printf("Want to do the to do the train y/n?> ");
             option = scanner.nextLine();
 
-            if (option == "y" || option == "Y")
+            if (option.equals("y"))
             {
                 for (String i : nameArray)
                 {
-                    System.out.print("What's your weight in pounds?> ");
-                    weight += scanner.nextLine();
-                    weight += " ";
-                    System.out.print("What's your height in inches?> ");
-                    height += scanner.nextLine();
-                    height += " ";
+                    System.out.printf("What's %s's weight in pounds?> ", i);
+                    weight = scanner.nextLine(); weightArray.add(weight);
+                    System.out.printf("What's %s's height in inches?> ", i);
+                    height = scanner.nextLine(); heightArray.add(height);
                 }
-                weightArray = weight.split(" ");
-                heightArray = weight.split(" ");
             }
         }
-        filler = 0;
 
         for (String i : nameArray)
         {
-            System.out.printf("What's the birthday of %s?>", nameArray[filler]);
-            bDay += scanner.nextLine(); bDay += " ";
-            filler++;
+            System.out.printf("What's the birthday of %s?> ", i);
+            bDay = scanner.nextLine(); bDayArray.add(bDay);
         }
-        bDayArray = bDay.split(" ");
-
         System.out.println("Tell the receptionist discount code MEMBER" +
                 " to get 20% off! Member-exclusive deal.");
     }
@@ -83,17 +78,16 @@ public class Main
         SimpleDateFormat simpledFormat = new SimpleDateFormat("dd/MM/yyyy");
         Quesionnare();
 
-        String optionToContinue = "n";
+        String optionToContinue = "y";
         filler = 0;
         CalculatingAlgorithms calculate = new CalculatingAlgorithms();
-        TicketPrinter myTicket = new TicketPrinter();
 
-        do
+        while (optionToContinue.equals("y"))
         {
-            System.out.printf("Whose ticket do you want to view? Person 0-%d> ", nameArray.length-1);
+            System.out.printf("Whose ticket do you want to view? Person 1-%d> ", nameArray.size());
             continueOption = scanner.nextInt();
             Date date1 = simpledFormat.parse(attendDate);
-            Date date2 = simpledFormat.parse(bDayArray[continueOption]);
+            Date date2 = simpledFormat.parse(bDayArray.get(continueOption-1));
             BigInteger indeed = new BigInteger(String.valueOf
                     (date1.getTime() - date2.getTime()));
             BigInteger millisecondsPerDay = new BigInteger("86400000");
@@ -103,7 +97,6 @@ public class Main
             timeDifference = timeDifference / 365;
 
             calculate.main(args);
-            myTicket.main(args);
 
             if (partyCount > 1)
             {
@@ -111,6 +104,5 @@ public class Main
                 optionToContinue = scanner.nextLine();
             }
         }
-        while (optionToContinue == "y");
     }
 }

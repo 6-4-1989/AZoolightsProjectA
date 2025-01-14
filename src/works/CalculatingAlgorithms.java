@@ -4,12 +4,12 @@ import java.text.ParseException;
 
 public class CalculatingAlgorithms
 {
-    static int costsIncurred, yourID;
-    static String ridingTheTrain;
+    static int costsIncurred;
+    static String ridingTheTrain = "", yourID = "";
 
     public static void main(String [] args) throws ParseException
     {
-        if (Main.attendDay == "Saturday" || Main.attendDay == "Sunday")
+        if (Main.attendDay.equals("Saturday") || Main.attendDay.equals("Sunday"))
         {
             costsIncurred += (Main.timeDifference > 18) ? 25 : 0;
             costsIncurred += (Main.timeDifference > 15 && Main.timeDifference <= 18) ? 18 : 0;
@@ -26,7 +26,7 @@ public class CalculatingAlgorithms
         //Train ride appears free I'm assuming
         if (Main.driveOrWalk.equals("drive") || Main.driveOrWalk.equals("Drive"))
         {
-            costsIncurred += 65 ;
+            costsIncurred += 65/Main.partyCount; //Divide Driving Costs Among Party
             if (Main.partyCount > 8)
             {
                 costsIncurred += Math.multiplyExact(Main.partyCount - 8, 12);
@@ -34,10 +34,10 @@ public class CalculatingAlgorithms
             ridingTheTrain = "Driving";
         }
 
-        if (Main.option == "y" || Main.option == "Y")
+        if (Main.option.equals("y"))
         {
-            ridingTheTrain = (Integer.parseInt(Main.weightArray[Main.continueOption]) < 300
-                    && Integer.parseInt(Main.heightArray[Main.continueOption]) > 48) ?
+            ridingTheTrain = (Integer.parseInt(Main.weightArray.get(Main.continueOption-1)) < 300
+                    && Integer.parseInt(Main.heightArray.get(Main.continueOption-1)) > 48) ?
                     "Can ride" : "Can't ride";
         }
         else
@@ -49,7 +49,10 @@ public class CalculatingAlgorithms
 
         for (int i = 0; i < 5; i++)
         {
-            yourID += random.nextInt(10);
+            yourID += String.valueOf(random.nextInt(10));
         }
+
+        TicketPrinter myTicket = new TicketPrinter();
+        myTicket.main(args);
     }
 }
