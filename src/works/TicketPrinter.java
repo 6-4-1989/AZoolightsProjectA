@@ -2,19 +2,22 @@ package works;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.StringBuilder;
 
 public class TicketPrinter extends JFrame
 {
     static JLabel titleLabel, costLabel, ageLabel, canAccessAlcohol,
-            canAccessTrain, ID;
+            canAccessTrain, ID, cutHere;
     static JPanel panelz = new JPanel();
     static JFrame theBiggestFrameTheWorldsEverSeen = new JFrame();
-    static StringBuilder string = new StringBuilder();
 
     public TicketPrinter()
     {
 
+    }
+    public void clearPane()
+    {
+        getContentPane().removeAll();
+        repaint();
     }
     private void setStuff()
     {
@@ -54,10 +57,15 @@ public class TicketPrinter extends JFrame
 
         //Alcohol
         CalculatingAlgorithms calculation = new CalculatingAlgorithms();
-        string.append(calculation.textFiller);
-        canAccessAlcohol = new JLabel("     " + string.toString(), SwingConstants.LEFT);
+        canAccessAlcohol = new JLabel("     " + calculation.textFiller.toString(), SwingConstants.LEFT);
         canAccessAlcohol.setFont(new Font("Serif", Font.ITALIC, 18));
         panelz.add(canAccessAlcohol);
+
+        cutHere = new JLabel("---------------------------------------------------------",
+                SwingConstants.CENTER);
+        cutHere.setVerticalAlignment(SwingConstants.BOTTOM);
+        cutHere.setFont(new Font("Serif", Font.ITALIC, 12));
+        panelz.add(canAccessTrain);
 
         setContentPane(panelz);
         theBiggestFrameTheWorldsEverSeen.setMinimumSize(new Dimension(8000, 6000));
