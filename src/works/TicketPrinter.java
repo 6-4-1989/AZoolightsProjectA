@@ -6,7 +6,7 @@ import java.awt.*;
 public class TicketPrinter extends JFrame
 {
     static JLabel titleLabel, costLabel, ageLabel, canAccessAlcohol,
-            canAccessTrain, ID, cutHere;
+            canAccessTrain, ID;
     static JPanel panelz = new JPanel();
     static JFrame theBiggestFrameTheWorldsEverSeen = new JFrame();
 
@@ -16,8 +16,9 @@ public class TicketPrinter extends JFrame
     }
     public void clearPane()
     {
-        getContentPane().removeAll();
-        repaint();
+        panelz.removeAll();
+        panelz.revalidate();
+        panelz.repaint();
     }
     private void setStuff()
     {
@@ -61,16 +62,11 @@ public class TicketPrinter extends JFrame
         canAccessAlcohol.setFont(new Font("Serif", Font.ITALIC, 18));
         panelz.add(canAccessAlcohol);
 
-        cutHere = new JLabel("---------------------------------------------------------",
-                SwingConstants.CENTER);
-        cutHere.setVerticalAlignment(SwingConstants.BOTTOM);
-        cutHere.setFont(new Font("Serif", Font.ITALIC, 12));
-        panelz.add(canAccessTrain);
-
         setContentPane(panelz);
         theBiggestFrameTheWorldsEverSeen.setMinimumSize(new Dimension(8000, 6000));
         getContentPane().setBackground(Color.PINK);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        validate();
         pack();
         setVisible(true);
     }

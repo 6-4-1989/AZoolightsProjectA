@@ -38,7 +38,7 @@ public class CalculatingAlgorithms
             ridingTheTrain = "Driving"; textFiller = "No Alcohol";
         }
 
-        if (Main.attendDay.equals("Sat") || Main.attendDay.equals("Sun"))
+        if (Main.attendDay.equals("Saturday") || Main.attendDay.equals("Sunday"))
         {
             costsIncurred += (Main.timeDifference > 18) ? 25 : 0;
             costsIncurred += (Main.timeDifference >= 15 && Main.timeDifference <= 18) ? 18 : 0;

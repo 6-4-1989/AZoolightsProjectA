@@ -1,3 +1,8 @@
+/*
+Names: Kevin, Aelinia, Tristan
+Date: 1/12/2025
+Description: Get info and print ticket for ZooLights
+ */
 package works;
 
 import java.text.DateFormat;
@@ -7,7 +12,9 @@ import java.util.Date;
 import java.util.Scanner;
 import java.math.BigInteger;
 import java.util.ArrayList;
-
+/*Don't know what "drive through tickets
+are 1 ticket number" means
+*/
 public class Main
 {
     static String names="", bDay="", height="", weight="",
@@ -22,14 +29,14 @@ public class Main
     public static void Quesionnare() throws ParseException
     {
         Scanner scanner = new Scanner(System.in);
-        SimpleDateFormat simpleFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleFormat = new SimpleDateFormat("MM/dd/yyyy" );
         DateFormat simplerFormat = new SimpleDateFormat("EEEE");
 
         System.out.print("Party Count?> ");
         partyCount = scanner.nextInt();
         scanner.nextLine(); //refresh
 
-        System.out.print("Date of attendance mm/dd/yyyy?> ");
+        System.out.print("Date of attendance MM/dd/yyyy?> ");
         attendDate = scanner.nextLine();
         Date date = simpleFormat.parse(attendDate);
         attendDay = simplerFormat.format(date);
